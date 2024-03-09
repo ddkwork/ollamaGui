@@ -12,14 +12,27 @@ import (
 	_ "embed"
 	"github.com/ddkwork/golibrary/stream/cmd"
 	"github.com/ddkwork/golibrary/widget"
+	"time"
 )
 
 //go:embed tokenMock.md
 var content string
 
+//go:generate core generate
+//go:generate core build -v -t android/arm64
+//go:generate core build -v -t windows/amd64
+//go:generate go build .
+//go:generate go run  -race  .
+//go:generate go install .
+//go:generate svg embed-image ollama.png
+
 var tokens = []string{"**", "Generic", " type", " constraints", "**", " allow", " you", " to", " specify", " constraints", " on", " a", " type", " that", " can", " vary", " depending", " on", " the", " specific", " type", " being", " instantiated", ".", "\n\n", "**", "Syntax", ":**", "\n\n", "```", "go", "\n", "type", " Name", "[", "T", " any", "]", " string", "\n", "```", "\n\n", "**", "Parameters", ":**", "\n\n", "*", " `", "T", "`:", " The", " type", " variable", ".", " It", " can", " be", " any", " type", ",", " including", " primitive", " types", ",", " structures", ",", " and", " functions", ".", "\n\n", "**", "Examples", ":**", "\n\n", "*", " ", "Integer", " constraint", ":**", "\n", "```", "go", "\n", "type", " Age", "[", "T", " int", "]", " int", "\n", "```", "\n\n", "This", " constraint", " ensures", " that", " `", "T", "`", " is", " an", " integer", " type", ".", "\n\n", "*", " ", "String", " constraint", ":**", "\n", "```", "go", "\n", "type", " Name", "[", "T", " string", "]", "\n", "```", "\n\n", "This", " constraint", " ensures", " that", " `", "T", "`", " is", " a", " string", " type", ".", "\n\n", "*", " ", "Struct", " constraint", ":**", "\n", "```", "go", "\n", "type", " User", "[", "T", " struct", "]", " {", "\n", "  ", "Name", " string", "\n", "  ", "Age", "  ", "int", "\n", "}", "\n", "```", "\n\n", "This", " constraint", " ensures", " that", " `", "T", "`", " is", " a", " struct", " type", " with", " at", " least", " two", " fields", " named", " `", "Name", "`", " and", " `", "Age", "`.", "\n\n", "*", " ", "Function", " constraint", ":**", "\n", "```", "go", "\n", "type", " Calculator", "[", "T", " any", "]", " func", "(", "T", ",", " T", ")", " T", "\n", "```", "\n\n", "This", " constraint", " ensures", " that", " `", "T", "`", " is", " a", " type", " that", " implements", " the", " `", "Calculator", "`", " interface", ".", "\n\n", "**", "Benefits", " of", " using", " generic", " type", " constraints", ":**", "\n\n", "*", " ", "Code", " reus", "ability", ":**", " You", " can", " apply", " the", " same", " constraint", " to", " multiple", " types", ",", " reducing", " code", " duplication", ".", "\n", "*", " ", "Type", " safety", ":**", " Constraints", " ensure", " that", " only", " valid", " types", " are", " used", ",", " preventing", " runtime", " errors", ".", "\n", "*", " ", "Improved", " maintain", "ability", ":**", " By", " separating", " the", " constraint", " from", " the", " type", ",", " it", " becomes", " easier", " to", " understand", " and", " modify", ".", "\n\n", "**", "Note", ":**", "\n\n", "*", " Generic", " type", " constraints", " are", " not", " applicable", " to", " primitive", " types", " (", "e", ".", "g", ".,", " `", "int", "`,", " `", "string", "`).", "\n", "*", " Constraints", " can", " be", " applied", " to", " function", " types", " only", " if", " the", " function", " is", " generic", ".", "\n", "*", " Constraints", " can", " be", " used", " with", " type", " parameters", ",", " allowing", " you", " to", " specify", " different", " constraints", " for", " different", " types", "."}
 
+//go:embed ollama.svg
+var windowIco []byte
+
 func main() {
+	gi.TheApp.SetIconBytes(windowIco)
 	b := gi.NewBody("ollamaGui")
 	b.AddAppBar(func(toolbar *gi.Toolbar) {
 		gi.NewButton(toolbar).SetText("install") //todo set icon
@@ -49,25 +62,24 @@ func main() {
 	frame := gi.NewFrame(rightSplits)
 	frame.Style(func(s *styles.Style) { s.Direction = styles.Column })
 	widget.NewSeparatorWithLabel("chat with ai", frame)
-	grr.Log(coredom.ReadMDString(coredom.NewContext(), frame, content)) //todo
 
-	//answer := gi.NewFrame(frame)
-	//go func() {
-	//	file := stream.NewReadFile("D:\\workspace\\workspace\\branch\\gpt4\\ollama\\ollama\\log.log.md")
-	//	lines, ok := file.ToLines()
-	//	if !ok {
-	//		return
-	//	}
-	//	for _, line := range lines {
-	//		println(line)
-	//		b.AsyncLock()
-	//		//answer.DeleteChildren(false)
-	//		grr.Log(coredom.ReadMDString(coredom.NewContext(), answer, line))
-	//		answer.Update()
-	//		b.AsyncUnlock()
-	//		time.Sleep(time.Second)
-	//	}
-	//}()
+	answer := gi.NewFrame(frame)
+	go func() {
+		for _, token := range tokens {
+			println(token)
+			b.AsyncLock()
+
+			//todo
+			//We need to check the token's newlines to deal with it,
+			//and secondly, we want to keep the previous token instead of deleting it
+			//answer.DeleteChildren(false)
+
+			grr.Log(coredom.ReadMDString(coredom.NewContext(), answer, token))
+			answer.Update()
+			b.AsyncUnlock()
+			time.Sleep(100 * time.Millisecond)
+		}
+	}()
 
 	downframe := gi.NewFrame(frame)
 	downframe.Style(func(s *styles.Style) { s.Direction = styles.Row })
