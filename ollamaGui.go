@@ -43,7 +43,7 @@ func main() {
 	gi.TheApp.SetIconBytes(windowIco)
 	b := gi.NewBody("ollamaGui")
 	b.AddAppBar(func(toolbar *gi.Toolbar) {
-		gi.NewButton(toolbar).SetText("install") //todo set icon
+		gi.NewButton(toolbar).SetText("install") //todo set icon and merge ollama doc md files into s dom tree view
 		gi.NewButton(toolbar).SetText("start server").OnClick(func(e events.Event) { cmd.Run("ollama serve") })
 		gi.NewButton(toolbar).SetText("stop server").OnClick(func(e events.Event) {
 			//todo kill thread ?
@@ -91,16 +91,28 @@ func main() {
 
 	downframe := gi.NewFrame(frame)
 	downframe.Style(func(s *styles.Style) { s.Direction = styles.Row })
-	topic := gi.NewButton(downframe).SetText("new topic").SetIcon(icons.ClearAll)
+	gi.NewTextField(downframe).SetType(gi.TextFieldOutlined).SetText("go1.22 Generic type constraints " +
+		"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" +
+		"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" +
+		"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" +
+		"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" +
+		"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" +
+		"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\nxxxxxxxxxxxxxxxxx").Style(func(s *styles.Style) {
+		s.Max.X.Em(200) //todo height not working
+		s.Max.Y.Em(400) //todo height not working
+		//s.Max.Zero()
+	})
+
+	newFrame := gi.NewFrame(downframe)
+	newFrame.Style(func(s *styles.Style) {
+		s.Direction = styles.Column
+		s.Align.Self = styles.End
+	})
+	topic := gi.NewButton(newFrame).SetText("new topic").SetIcon(icons.ClearAll)
 	topic.Style(func(s *styles.Style) {
 		s.Min.Set(units.Dp(33))
 	})
-	//gi.NewTextField(downframe).SetText("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx").Style(func(s *styles.Style) { s.SetTextWrap(true) })
-	gi.NewTextField(downframe).SetText("go1.22 Generic type constraints").Style(func(s *styles.Style) {
-		//s.Max.X.Em(10) //todo height not working
-		s.Max.Zero()
-	})
-	gi.NewButton(downframe).SetText("send").Style(func(s *styles.Style) {
+	gi.NewButton(newFrame).SetText("send").Style(func(s *styles.Style) {
 		s.Min.Set(units.Dp(33))
 	})
 
