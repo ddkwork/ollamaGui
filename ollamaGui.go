@@ -13,6 +13,7 @@ import (
 	_ "embed"
 	"github.com/ddkwork/golibrary/stream/cmd"
 	"github.com/ddkwork/golibrary/widget"
+	"io/fs"
 	"time"
 )
 
@@ -36,6 +37,7 @@ var windowIco []byte
 var myIcons embed.FS
 
 func main() {
+	icons.AddFS(grr.Log1(fs.Sub(myIcons, "svg")))
 	gi.TheApp.SetIconBytes(windowIco)
 	b := gi.NewBody("ollamaGui")
 	b.AddAppBar(func(toolbar *gi.Toolbar) {
