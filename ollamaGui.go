@@ -14,7 +14,7 @@ import (
 	"github.com/ddkwork/golibrary/widget"
 )
 
-//go:embed example.md
+//go:embed tokenMock.md
 var content string
 
 func main() {
