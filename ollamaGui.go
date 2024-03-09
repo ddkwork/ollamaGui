@@ -6,6 +6,7 @@ import (
 	"cogentcore.org/core/giv"
 	"cogentcore.org/core/grr"
 	"cogentcore.org/core/styles"
+	"cogentcore.org/core/units"
 	_ "embed"
 	"github.com/ddkwork/golibrary/widget"
 )
@@ -29,7 +30,10 @@ func main() {
 	leftFrame.Style(func(s *styles.Style) { s.Direction = styles.Column })
 	widget.NewSeparatorWithLabel("module choose", leftFrame)
 	giv.NewFileView(leftFrame)
-	gi.NewButton(leftFrame).SetText("run module")
+	gi.NewButton(leftFrame).SetText("run module").Style(func(s *styles.Style) {
+		s.Align.Self = styles.End
+		s.Min.Set(units.Dp(33))
+	})
 
 	rightSplits := gi.NewSplits(splits)
 	splits.SetSplits(.2, .8)
@@ -65,7 +69,9 @@ func main() {
 		s.Min.X.Set(200, 200) //todo height not working
 		s.SetTextWrap(true)
 	})
-	gi.NewButton(downframe).SetText("send")
+	gi.NewButton(downframe).SetText("send").Style(func(s *styles.Style) {
+		s.Min.Set(units.Dp(33))
+	})
 
 	rightSplits.SetSplits(.6, .4) //todo not working
 
