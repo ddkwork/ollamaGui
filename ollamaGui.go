@@ -25,12 +25,11 @@ func main() {
 
 	splits := gi.NewSplits(b)
 
-	lestSplits := gi.NewSplits(splits)
-	lestSplits.Style(func(s *styles.Style) { s.Direction = styles.Column })
-	widget.NewSeparatorWithLabel("module choose", lestSplits)
-	giv.NewFileView(lestSplits)
-	gi.NewButton(lestSplits).SetText("run module")
-	lestSplits.SetSplits(.1, .6, .3) //todo not working
+	leftFrame := gi.NewFrame(splits)
+	leftFrame.Style(func(s *styles.Style) { s.Direction = styles.Column })
+	widget.NewSeparatorWithLabel("module choose", leftFrame)
+	giv.NewFileView(leftFrame)
+	gi.NewButton(leftFrame).SetText("run module")
 
 	rightSplits := gi.NewSplits(splits)
 	splits.SetSplits(.2, .8)
@@ -62,7 +61,10 @@ func main() {
 	downframe.Style(func(s *styles.Style) { s.Direction = styles.Row })
 	gi.NewButton(downframe).SetText("new topic")
 	//gi.NewTextField(downframe).SetText("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx").Style(func(s *styles.Style) { s.SetTextWrap(true) })
-	gi.NewTextField(downframe).SetText("Multiline textfield with a relativelyrelativelyrelativelyrelativelyrelativelyrelativelyrelatively long initial text").Style(func(s *styles.Style) { s.SetTextWrap(true) })
+	gi.NewTextField(downframe).SetText("Multiline textfield with a  long initial text").Style(func(s *styles.Style) {
+		s.Min.X.Set(200, 200) //todo height not working
+		s.SetTextWrap(true)
+	})
 	gi.NewButton(downframe).SetText("send")
 
 	rightSplits.SetSplits(.6, .4) //todo not working
