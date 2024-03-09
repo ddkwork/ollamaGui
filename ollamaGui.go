@@ -2,6 +2,7 @@ package main
 
 import (
 	"cogentcore.org/core/coredom"
+	"cogentcore.org/core/events"
 	"cogentcore.org/core/gi"
 	"cogentcore.org/core/giv"
 	"cogentcore.org/core/grr"
@@ -9,6 +10,7 @@ import (
 	"cogentcore.org/core/styles"
 	"cogentcore.org/core/units"
 	_ "embed"
+	"github.com/ddkwork/golibrary/stream/cmd"
 	"github.com/ddkwork/golibrary/widget"
 )
 
@@ -19,8 +21,12 @@ func main() {
 	b := gi.NewBody("ollamaGui")
 	b.AddAppBar(func(toolbar *gi.Toolbar) {
 		gi.NewButton(toolbar).SetText("install") //todo set icon
-		gi.NewButton(toolbar).SetText("start server")
-		gi.NewButton(toolbar).SetText("stop server")
+		gi.NewButton(toolbar).SetText("start server").OnClick(func(e events.Event) {
+			cmd.Run("ollama serve")
+		})
+		gi.NewButton(toolbar).SetText("stop server").OnClick(func(e events.Event) {
+			//todo kill thread ?
+		})
 		gi.NewButton(toolbar).SetText("logView")
 		gi.NewButton(toolbar).SetText("about")
 	})
