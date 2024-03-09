@@ -74,7 +74,7 @@ func main() {
 		s.Min.Set(units.Dp(33))
 	})
 	//gi.NewTextField(downframe).SetText("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx").Style(func(s *styles.Style) { s.SetTextWrap(true) })
-	gi.NewTextField(downframe).SetText("Multiline textfield with a  long initial text").Style(func(s *styles.Style) {
+	gi.NewTextField(downframe).SetText("go1.22 Generic type constraints").Style(func(s *styles.Style) {
 		//s.Max.X.Em(10) //todo height not working
 		s.Max.Zero()
 	})
