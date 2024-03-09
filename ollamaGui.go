@@ -63,7 +63,9 @@ func main() {
 
 	downframe := gi.NewFrame(frame)
 	downframe.Style(func(s *styles.Style) { s.Direction = styles.Row })
-	gi.NewButton(downframe).SetText("new topic")
+	gi.NewButton(downframe).SetText("new topic").Style(func(s *styles.Style) {
+		s.Min.Set(units.Dp(33))
+	})
 	//gi.NewTextField(downframe).SetText("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx").Style(func(s *styles.Style) { s.SetTextWrap(true) })
 	gi.NewTextField(downframe).SetText("Multiline textfield with a  long initial text").Style(func(s *styles.Style) {
 		s.Min.X.Set(200, 200) //todo height not working
