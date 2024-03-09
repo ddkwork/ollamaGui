@@ -48,11 +48,11 @@ func main() {
 	//	}
 	//	for _, line := range lines {
 	//		println(line)
-	//		updt := answer.UpdateStartAsync()
+	//		b.AsyncLock()
 	//		//answer.DeleteChildren(false)
 	//		grr.Log(coredom.ReadMDString(coredom.NewContext(), answer, line))
 	//		answer.Update()
-	//		answer.UpdateEndAsyncLayout(updt)
+	//		b.AsyncUnlock()
 	//		time.Sleep(time.Second)
 	//	}
 	//}()
