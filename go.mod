@@ -2,8 +2,6 @@ module github.com/ddkwork/ollamaGui
 
 go 1.22.1
 
-require github.com/ddkwork/golibrary v0.0.0-20240306170129-dd853f36e227
-
 require (
 	cogentcore.org/core v0.0.8-0.20240309010543-9eb35d11ca28 // indirect
 	github.com/Bios-Marcel/wastebasket v0.0.4-0.20240213135800-f26f1ae0a7c4 // indirect
@@ -13,6 +11,7 @@ require (
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/chewxy/math32 v1.10.1 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
+	github.com/ddkwork/golibrary v0.0.0-20240309015738-9f5008ac7548 // indirect
 	github.com/dlclark/regexp2 v1.10.0 // indirect
 	github.com/ericchiang/css v1.3.0 // indirect
 	github.com/fatih/color v1.16.0 // indirect
