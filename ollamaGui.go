@@ -17,9 +17,6 @@ import (
 	"time"
 )
 
-//go:embed tokenMock.md
-var content string
-
 //go:generate core generate
 //go:generate core build -v -t android/arm64
 //go:generate core build -v -t windows/amd64
@@ -36,6 +33,9 @@ var (
 
 	//go:embed svg/*.svg
 	myIcons embed.FS
+
+	//go:embed tokenMock.md
+	content string
 )
 
 func main() {
