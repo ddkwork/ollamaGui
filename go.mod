@@ -2,12 +2,10 @@ module github.com/ddkwork/ollamaGui
 
 go 1.22.1
 
-require (
-	cogentcore.org/core v0.0.7
-	github.com/ddkwork/golibrary v0.0.0-20240306170129-dd853f36e227
-)
+require github.com/ddkwork/golibrary v0.0.0-20240306170129-dd853f36e227
 
 require (
+	cogentcore.org/core v0.0.8-0.20240309010543-9eb35d11ca28 // indirect
 	github.com/Bios-Marcel/wastebasket v0.0.4-0.20240213135800-f26f1ae0a7c4 // indirect
 	github.com/Masterminds/vcs v1.13.3 // indirect
 	github.com/alecthomas/chroma/v2 v2.12.0 // indirect
