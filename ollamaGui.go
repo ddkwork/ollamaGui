@@ -68,8 +68,8 @@ func main() {
 	})
 	//gi.NewTextField(downframe).SetText("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx").Style(func(s *styles.Style) { s.SetTextWrap(true) })
 	gi.NewTextField(downframe).SetText("Multiline textfield with a  long initial text").Style(func(s *styles.Style) {
-		s.Min.X.Set(200, 200) //todo height not working
-		s.SetTextWrap(true)
+		s.Max.X.Set(0, 0) //todo height not working
+		s.Max.Y.Set(0, 0)
 	})
 	gi.NewButton(downframe).SetText("send").Style(func(s *styles.Style) {
 		s.Min.Set(units.Dp(33))
