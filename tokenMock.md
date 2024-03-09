@@ -29,8 +29,8 @@ This constraint ensures that `T` is a string type.
 * Struct constraint:**
 ```go
 type User[T struct] {
-  Name string
-  Age  int
+Name string
+Age  int
 }
 ```
 
