@@ -75,7 +75,7 @@ func main() {
 	go func() {
 		for _, token := range tokens {
 			println(token)
-			b.AsyncLock()
+			answer.AsyncLock()
 
 			//todo
 			//We need to check the token's newlines to deal with it,
@@ -84,7 +84,7 @@ func main() {
 
 			grr.Log(coredom.ReadMDString(coredom.NewContext(), answer, token))
 			answer.Update()
-			b.AsyncUnlock()
+			answer.AsyncUnlock()
 			time.Sleep(100 * time.Millisecond)
 		}
 	}()
