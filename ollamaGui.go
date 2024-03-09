@@ -5,6 +5,7 @@ import (
 	"cogentcore.org/core/gi"
 	"cogentcore.org/core/giv"
 	"cogentcore.org/core/grr"
+	"cogentcore.org/core/icons"
 	"cogentcore.org/core/styles"
 	"cogentcore.org/core/units"
 	_ "embed"
@@ -63,7 +64,8 @@ func main() {
 
 	downframe := gi.NewFrame(frame)
 	downframe.Style(func(s *styles.Style) { s.Direction = styles.Row })
-	gi.NewButton(downframe).SetText("new topic").Style(func(s *styles.Style) {
+	topic := gi.NewButton(downframe).SetText("new topic").SetIcon(icons.ClearAll)
+	topic.Style(func(s *styles.Style) {
 		s.Min.Set(units.Dp(33))
 	})
 	//gi.NewTextField(downframe).SetText("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx").Style(func(s *styles.Style) { s.SetTextWrap(true) })
