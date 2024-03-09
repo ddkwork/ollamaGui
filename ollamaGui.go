@@ -21,11 +21,10 @@ func main() {
 	b := gi.NewBody("ollamaGui")
 	b.AddAppBar(func(toolbar *gi.Toolbar) {
 		gi.NewButton(toolbar).SetText("install") //todo set icon
-		gi.NewButton(toolbar).SetText("start server").OnClick(func(e events.Event) {
-			cmd.Run("ollama serve")
-		})
+		gi.NewButton(toolbar).SetText("start server").OnClick(func(e events.Event) { cmd.Run("ollama serve") })
 		gi.NewButton(toolbar).SetText("stop server").OnClick(func(e events.Event) {
 			//todo kill thread ?
+			//netstat -aon|findstr 11434
 		})
 		gi.NewButton(toolbar).SetText("logView")
 		gi.NewButton(toolbar).SetText("about")

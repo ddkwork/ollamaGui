@@ -1,39 +1,54 @@
-# Gidom in Markdown
+**Generic type constraints** allow you to specify that a variable or function can work with different types, as long as those types satisfy certain conditions.
 
-### Made with ***Goki***
+**Types of generic type constraints:**
 
-This is a sample _MD_ (markdown) **document** displayed using `gidom`.
+* Constraints on variables:**
+    * `T` specifies the type of the variable.
+    * `A` specifies a constraint on the variable. Examples include `T > 10` (greater than 10) and `T == "string"` (equal to "string").
+* Constraints on functions:**
+    * `R` specifies the return type of the function.
+    * `A` specifies a constraint on the arguments of the function.
+    * `T` specifies the return type of the function.
 
-This is a [link to the ***Goki*** website](https://goki.dev), which you can _click_ on to see helpful **documentation** and examples for the *Goki* framework.
-
-# Heading 1
-## Heading 2
-### Heading 3
-
-
-* List item 3
-    * Sub list item 1
-    * Sub list item 2
-
-1. List item 1
-    1. Sub list item 1
-    2. Sub list item 2
-2. List item 2
-    1. Sub list item 1
-    2. Sub list item 2
-3. List item 3
-    1. Sub list item 1
-    2. Sub list item 2
-
-
-### This is a code block:
+**Examples of generic type constraints:**
 
 ```go
-package main
+// Generic constraint on a variable
+func sum(a, b int) int {
+  return a + b
+}
 
-import "fmt"
+// Generic constraint on a function
+func greet(name string) string {
+  return "Hello, " + name
+}
 
-func main() {
-    fmt.Println("Hello, world!")
+// Generic constraint on a slice of strings
+type person struct {
+  name string
+}
+
+func (p erson) sayHello() {
+  println("Hello, " + p.name)
 }
 ```
+
+**Benefits of using generic type constraints:**
+
+* Code reusability:** You can apply the same constraint to multiple variables or functions.
+* Improved type safety:** It prevents the compiler from making assumptions about variable types, reducing potential errors.
+* Enhanced readability:** Constraints make the code more explicit and easier to understand.
+
+**Note:**
+
+* Generic type constraints are defined using the `interface{}` type.
+* Constraints can be combined using the `and` and `or` keywords.
+* Constraints can be used with variables, functions, and types.
+
+**Additional resources:**
+
+* Go documentation on generics and constraints:
+    * `type constraint`
+    * `func constraint`
+* Example of using generic type constraints:
+    * `
